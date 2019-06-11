@@ -1,21 +1,10 @@
 <?php 
   require "predis/autoload.php";
   //global variables
-  $MAC  = 0;
-  $MODE = 0;
-  $POS  = 0;
-  $ALARM = 0;
-  $TEMPERATURE = 0;
-  $VOLTAGE = 0;
-  $AI1 = 0;
-  $AI2 = 0;
-  $AI3 = 0;
-  $AI4 = 0;
-  $TIMESTAMP =0;
-
-  $state  ="";
-  $modo = "";
-  $gate_name = "Boco";
+  $TOTAL_RTCU=0;
+  $RTCU_GOOD=0;
+  $RTCU_BAD=0;
+  $ALARM=0;
 
   $table = array();
 
@@ -28,8 +17,22 @@
       $val = $redis->get($k);
       $row = explode(",",$val);
       $mac = $row[0];
-      $table[$mac] = $row;
-      //echo $val;
+      $name = $row[1];
+
+      if(strpos($name,'3ra Seccion') != false) {
+        $timestamp = $row[4];
+        $name2 = explode("/",$name);
+        $row[1] = $name2[0];
+        $diff = time()-$timestamp;
+        //echo " diff=" . $diff . "<br>";
+        if($diff < 3600) {
+          $RTCU_GOOD++;
+        } else {
+          $RTCU_BAD++;
+        }
+        $table[$mac] = $row;
+        //echo $val;
+      }
     }
 
     ksort($table);
@@ -72,7 +75,7 @@
 
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="index.html">Tercera Sección del Río Aconcagua</a>
+    <a class="navbar-brand mr-1" href="index.php">Tercera Sección del Río Aconcagua</a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
@@ -140,7 +143,7 @@
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="index.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span>
         </a>
@@ -174,21 +177,23 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <h6 class="dropdown-header">Compuertas</h6>
-          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cBoco.php?pass=m3tr1cpr0">Boco</a>
-          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cMauco.php?pass=m3tr1cpr0">Mauco</a>
-          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cRauten.php?pass=m3tr1cpr0">Rautén</a>
-          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cHijuelas.php?pass=m3tr1cpr0">Hijuelas</a>
-          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cSanpedro.php?pass=m3tr1cpr0">San Pedro</a>
-          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cPurutun.php?pass=m3tr1cpr0">Purutún</a>
-          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cMelon.php?pass=m3tr1cpr0">Melón</a>
-          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cCandelaria.php?pass=m3tr1cpr0">Candelaria</a>
-          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cWaddington.php?pass=m3tr1cpr0">Waddington</a>
-          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cSerrano.php?pass=m3tr1cpr0">Serrano</a>
-          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cOvalle.php?pass=m3tr1cpr0">Ovalle</a>
-          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cCallelarga.php?pass=m3tr1cpr0">Calle Larga</a>
-          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cOcoa.php?pass=m3tr1cpr0">Ocoa</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cCompuerta.php?pass=m3tr1cpr0&gate_name=Boco">Boco</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cCompuerta.php?pass=m3tr1cpr0&gate_name=Mauco">Mauco</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cCompuerta.php?pass=m3tr1cpr0&gate_name=Rauten%20Admision">Rautén</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cCompuerta.php?pass=m3tr1cpr0&gate_name=Hijuelas">Hijuelas</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cCompuerta.php?pass=m3tr1cpr0&gate_name=San%20Pedro">San Pedro</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cCompuerta.php?pass=m3tr1cpr0&gate_name=Purutun">Purutún</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cCompuerta.php?pass=m3tr1cpr0&gate_name=Melon">Melón</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cCompuerta.php?pass=m3tr1cpr0&gate_name=Candelaria%20Admision">Candelaria Admision</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cCompuerta.php?pass=m3tr1cpr0&gate_name=Candelaria%20Descarga">Candelaria Descarga</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cCompuerta.php?pass=m3tr1cpr0&gate_name=Waddington">Waddington</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cCompuerta.php?pass=m3tr1cpr0&gate_name=Serrano">Serrano</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cCompuerta.php?pass=m3tr1cpr0&gate_name=Ovalle">Ovalle</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cCompuerta.php?pass=m3tr1cpr0&gate_name=Calle%20Larga">Calle Larga</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha2/cCompuerta.php?pass=m3tr1cpr0&gate_name=Ocoa">Ocoa</a>
         </div>
       </li>
+<!--
       <li class="nav-item">
         <a class="nav-link" href="charts.html">
           <i class="fas fa-fw fa-chart-area"></i>
@@ -199,6 +204,7 @@
           <i class="fas fa-fw fa-table"></i>
           <span>Tables</span></a>
       </li>
+-->
     </ul>
 
     <div id="content-wrapper">
@@ -221,7 +227,7 @@
                 <div class="card-body-icon">
                   <i class="fas fa-fw fa-comments"></i>
                 </div>
-                <div class="mr-5">26 New Messages!</div>
+                <div class="mr-5"><?php echo $RTCU_GOOD . " actualizados" ?></div>
               </div>
               <a class="card-footer text-white clearfix small z-1" href="#">
                 <span class="float-left">View Details</span>
@@ -237,7 +243,7 @@
                 <div class="card-body-icon">
                   <i class="fas fa-fw fa-list"></i>
                 </div>
-                <div class="mr-5">11 New Tasks!</div>
+                <div class="mr-5"><?php echo $RTCU_BAD . " no actualizados" ?></div>
               </div>
               <a class="card-footer text-white clearfix small z-1" href="#">
                 <span class="float-left">View Details</span>
@@ -253,7 +259,7 @@
                 <div class="card-body-icon">
                   <i class="fas fa-fw fa-shopping-cart"></i>
                 </div>
-                <div class="mr-5">123 New Orders!</div>
+                <div class="mr-5">-</div>
               </div>
               <a class="card-footer text-white clearfix small z-1" href="#">
                 <span class="float-left">View Details</span>
@@ -269,7 +275,7 @@
                 <div class="card-body-icon">
                   <i class="fas fa-fw fa-life-ring"></i>
                 </div>
-                <div class="mr-5">13 New Tickets!</div>
+                <div class="mr-5">0 Alarmas</div>
               </div>
               <a class="card-footer text-white clearfix small z-1" href="#">
                 <span class="float-left">View Details</span>
@@ -307,8 +313,10 @@
                     <th>RTCU</th>
                     <th>Nombre</th>
                     <th>Tipo</th>
+                  <!--  
                     <th>Nivel</th>
                     <th>Caudal</th>
+                  -->
                     <th>Última Actualización</th>
                   </tr>
                 </thead>
@@ -317,8 +325,10 @@
                     <th>RTCU</th>
                     <th>Nombre</th>
                     <th>Tipo</th>
+                  <!--  
                     <th>Nivel</th>
                     <th>Caudal</th>
+                  -->
                     <th>Última Actualización</th>
                   </tr>
                 </tfoot>
@@ -328,8 +338,10 @@
                     <td><?php echo $row[0]; ?></td>
                     <td><?php echo $row[1]; ?></td>
                     <td><?php echo $row[2]; ?></td>
+                  <!--
                     <td></td>
                     <td></td>
+                   -->
                     <td><?php echo $row[3]; ?></td>
                   </tr>
 <?php } ?>
@@ -347,7 +359,7 @@
       <footer class="sticky-footer">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright © Your Website 2019</span>
+            <span>Copyright © MetricPro 2019</span>
           </div>
         </div>
       </footer>
