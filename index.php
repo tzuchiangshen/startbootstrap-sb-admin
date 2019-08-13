@@ -155,19 +155,19 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <h6 class="dropdown-header">Telemetrias</h6>
-          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha/tBoco.php?pass=m3tr1cpr0">Boco</a>
-          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha/tMauco.php?pass=m3tr1cpr0">Mauco</a>
-          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha/tRauten.php?pass=m3tr1cpr0">Rautén</a>
-          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha/tHijuelas.php?pass=m3tr1cpr0">Hijuelas</a>
-          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha/tSanpedro.php?pass=m3tr1cpr0">San Pedro</a>
-          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha/tPurutun.php?pass=m3tr1cpr0">Purutún</a>
-          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha/tMelon.php?pass=m3tr1cpr0">Melón</a>
-          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha/tCandelaria.php?pass=m3tr1cpr0">Candelaria</a>
-          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha/tWaddington.php?pass=m3tr1cpr0">Waddington</a>
-          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha/tSerrano.php?pass=m3tr1cpr0">Serrano</a>
-          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha/tOvalle.php?pass=m3tr1cpr0">Ovalle</a>
-          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha/tCallelarga.php?pass=m3tr1cpr0">Calle Larga</a>
-          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha/tOcoa.php?pass=m3tr1cpr0">Ocoa</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha/tTelemetria.php?pass=m3tr1cpr0&gate_name=Boco">Boco</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha/tTelemetria.php?pass=m3tr1cpr0&gate_name=Mauco">Mauco</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha/tTelemetria.php?pass=m3tr1cpr0&gate_name=Rauten">Rautén</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha/tTelemetria.php?pass=m3tr1cpr0&gate_name=Hijuelas">Hijuelas</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha/tTelemetria.php?pass=m3tr1cpr0&gate_name=San%20Pedro">San Pedro</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha/tTelemetria.php?pass=m3tr1cpr0&gate_name=Purutun">Purutún</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha/tTelemetria.php?pass=m3tr1cpr0&gate_name=Melon">Melón</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha/tTelemetria.php?pass=m3tr1cpr0&gate_name=Candelaria">Candelaria</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha/tTelemetria.php?pass=m3tr1cpr0&gate_name=Waddington">Waddington</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha/tTelemetria.php?pass=m3tr1cpr0&gate_name=Serrano">Serrano</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha/tTelemetria.php?pass=m3tr1cpr0&gate_name=Ovalle">Ovalle</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha/tTelemetria.php?pass=m3tr1cpr0&gate_name=Calle%20Larga">Calle Larga</a>
+          <a class="dropdown-item" href="http://web02.metricpro.cl/alpha/tTelemetria.php?pass=m3tr1cpr0&gate_name=Ocoa">Ocoa</a>
         </div>
       </li>
       <li class="nav-item dropdown">
