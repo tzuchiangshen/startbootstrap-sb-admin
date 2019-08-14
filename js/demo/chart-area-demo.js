@@ -5,11 +5,14 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 // Area Chart Example
 $(document).ready(function() {
   $.ajax({
-    url: "http://www.metricpro.cl:8889/get_sensor_flow_interpolation?mac=275749061&x=0.6475"
+    url: "http://www.metricpro.cl:8889/get_sensor_flow_data?mac=275749061&x=0.6475"
   }).then(function(data) {
-    //alert("hola: " + data.result.x);
-    var mylabels = ["Feb 1", "Mar 2", "Mar 3", "Mar 4", "Mar 5", "Mar 6", "Mar 7", "Mar 8", "Mar 9", "Mar 10", "Mar 11", "Mar 12", "Mar 13"];
-    var mydata = [20001, 30162, 26263, 18394, 18287, 28682, 31274, 33259, 25849, 24159, 32651, 31984, 38451];
+    //var mylabels = ["Feb 1", "Mar 2", "Mar 3", "Mar 4", "Mar 5", "Mar 6", "Mar 7", "Mar 8", "Mar 9", "Mar 10", "Mar 11", "Mar 12", "Mar 13"];
+    //var mydata = [20001, 30162, 26263, 18394, 18287, 28682, 31274, 33259, 25849, 24159, 32651, 31984, 38451];
+    var mylabels = data.result.x;
+    //console.log("data.result.x:" + data.result.x);
+    var mydata = data.result.y;
+
     var ctx = document.getElementById("myAreaChart");
     var myLineChart = new Chart(ctx, {
       type: 'line',
@@ -48,7 +51,7 @@ $(document).ready(function() {
           yAxes: [{
             ticks: {
               min: 0,
-              max: 40000,
+              max: 1000,
               maxTicksLimit: 5
             },
             gridLines: {
