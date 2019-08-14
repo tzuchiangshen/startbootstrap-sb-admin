@@ -1,7 +1,7 @@
 <?php 
 
-print_r($_POST);
-print_r($_SERVER);
+//print_r($_POST);
+//print_r($_SERVER);
 
 session_start();
 
@@ -9,8 +9,8 @@ session_start();
 $email = $_POST["email"];
 $pass = $_POST["password"];
 
-echo "email:" . $email . "<br>";
-echo "pass:" . $pass;
+//echo "email:" . $email . "<br>";
+//echo "pass:" . $pass;
 
 
 if(strcmp($email, 'tercera_seccion@gmail.com') == 0)  {
